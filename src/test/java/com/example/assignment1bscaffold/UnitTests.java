@@ -1,99 +1,91 @@
 package com.example.assignment1bscaffold;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 public class UnitTests {
 
-    // @Test
-    // void rotateLeftTest() {
-    // String[] textArray = {"a", "b", "c", "d", "e"};
-    // String[] expected = {"b", "c", "d", "e", "a"};
-    // String[] actual = Assignment1bAssignment.rotateLeftStrings(textArray);
-    // assert(actual[0] == expected[0]);
-    // assert(actual[1] == expected[1]);
-    // assert(actual[2] == expected[2]);
-    // assert(actual[3] == expected[3]);
-    // assert(actual[4] == expected[4]);
-    // }
+    @Test
+    void rotateArrayTest() {
+        String[] textArray = { "a", "b", "c", "d", "e" };
+        int places = 1;
+        String[] expected = { "b", "c", "d", "e", "a" };
+        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        assertArrayEquals(expected, actual);
+    }
 
-    // @Test
-    // void rotateLeftTestWhenEmpty() {
-    // String[] textArray = {};
-    // int expected = 0;
-    // String[] actual = Assignment1bAssignment.rotateLeftStrings(textArray);
-    // assert(actual.length == expected);
-    // }
+    @Test
+    void rotateArrayTestWithMorePlaces() {
+        String[] textArray = { "a", "b", "c", "d", "e" };
+        int places = 3;
+        String[] expected = { "d", "e", "a", "b", "c" };
+        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        assertArrayEquals(expected, actual);
+    }
 
-    // @Test
-    // void pageBreakTest() {
-    // String[] textArray = {"a", "b", "c", "d", "e"};
-    // String[] expected1 = {"a", "b", "*page break*", "c", "d", "*pagebreak*",
-    // "e"};
-    // String[] expected2 = {"a", "b", "c", "d", "e", "*page break*"};
-    // String[] expected3 = textArray.clone();
-    // String[] actual1 = Assignment1bAssignment.pageBreak(textArray, 2);
-    // String[] actual2 = Assignment1bAssignment.pageBreak(textArray, 5);
-    // String[] actual3 = Assignment1bAssignment.pageBreak(textArray, 6);
-    // String[] actual4 = Assignment1bAssignment.pageBreak(textArray, 0);
+    @Test
+    void rotateArrayTestWhenEmpty() {
+        String[] textArray = {};
+        int places = 3;
+        String[] expected = {};
+        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        assertArrayEquals(expected, actual);
+    }
 
-    // assert(Arrays.equals(actual1, expected1));
-    // assert(Arrays.equals(actual2, expected2));
-    // assert(Arrays.equals(actual3, expected3));
-    // assert(Arrays.equals(actual4, expected3));
-    // }
+    @Test
+    void insertPageBreaksTest() {
+        String[] textArray = { "a", "b", "c", "d", "e" };
+        int location = 2;
+        String[] expected = { "a", "b", "*page break*", "c", "d", "*page break*", "e" };
+        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        assertArrayEquals(expected, actual);
+    }
 
-    // @Test
-    // void pageBreakWhenEmptyTest() {
-    // String[] textArray = {};
-    // int expected = 0;
-    // String[] actual = Assignment1bAssignment.pageBreak(textArray, 2);
-    // assert(actual.length == expected);
+    @Test
+    void insertPageBreaksTestWhenLocationExceedsLength() {
+        String[] textArray = { "a", "b", "c", "d", "e" };
+        int location = 6;
+        String[] expected = { "a", "b", "c", "d", "e" };
+        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        assertArrayEquals(expected, actual);
+    }
 
-    // }
+    @Test
+    void insertPageBreaksWhenEmptyTest() {
+        String[] textArray = {};
+        int location = 2;
+        String[] expected = {};
+        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        assertArrayEquals(expected, actual);
+    }
 
-    // @Test
-    // void testLogicPuzzle() {
-    // String[][] textArray = Assignment1bAssignment.logicPuzzle();
-    // for (int i = 0; i < textArray.length; i++) {
-    // if (textArray[i][0] == "Bob") {
-    // assert(textArray[i][1] == "dog");
-    // } else if (textArray[i][0] == "Priya") {
-    // assert(textArray[i][1] == "cat");
-    // } else if (textArray[i][0] == "Lane") {
-    // assert(textArray[i][1] == "bird");
-    // } else if (textArray[i][0] == "Yien") {
-    // assert(textArray[i][1] == "fish");
-    // } else if (textArray[i][0] == "Jane") {
-    // assert(textArray[i][1] == "hamster");
-    // } else {
-    // assert(false);
-    // }
-    // }
-    // }
+    @Test
+    void testLogicPuzzle() {
+        String[][] expected = {
+                { "Bob", "Jane", "Priya", "Lane", "Yien" },
+                { "dog", "hamster", "bird", "fish", "cat" }
+        };
+        String[][] actual = Assignment1aAssignment.solveLogicPuzzle();
+        assertArrayEquals(expected[0], actual[0]);
+        assertArrayEquals(expected[1], actual[1]);
+    }
 
-    // @Test
-    // void tableLocationTest() {
-    // Assignment1bAssignment.Point[] test =
-    // Assignment1bAssignment.aroundTheTable(4, 10);
-
-    // // N.B. This is only testing for 4 players, radius 10.
-    // // You should test for other numbers of players and radii.
-    // // Marks are not guaranteed just because this test passes.
-
-    // assert(test.length == 4);
-    // assertEquals(test[0].x, 30.0, 0.1);
-    // assertEquals(test[0].y, 40.0, 0.1);
-    // assertEquals(test[1].x, 20.0, 0.1);
-    // assertEquals(test[1].y, 30.0, 0.1);
-    // assertEquals(test[2].x, 30.0, 0.1);
-    // assertEquals(test[2].y, 20.0, 0.1);
-    // assertEquals(test[3].x, 40.0, 0.1);
-    // assertEquals(test[3].y, 30.0, 0.1);
-
-    // }
-
+    @Test
+    void locatePlayersTest() {
+        int diameter = 100;
+        int players = 4;
+        double[][] expected = {
+                { 70.0, 120.0 },
+                { 20.0, 70.0 },
+                { 70.0, 20.0 },
+                { 120.0, 70.0 }
+        };
+        double[][] actual = Assignment1aAssignment.locatePlayers(diameter, players);
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i][0], actual[i][0], 0.1);
+            assertEquals(expected[i][1], actual[i][1], 0.1);
+        }
+    }
 }

@@ -77,10 +77,10 @@ public class Assignment1aAssignment {
         // Boolean array tracking possible pets for each student
         boolean[][] possiblePets = {
                 { true, false, false, false, false },
-                { true, false, true, false, true },
-                { true, false, false, true, false },
-                { false, false, true, true, true },
-                { false, true, false, true, false }
+                { false, true, true, true, true },
+                { false, true, true, true, true },
+                { false, true, true, true, true },
+                { false, true, true, true, true }
         };
 
         // Applying given constraints
