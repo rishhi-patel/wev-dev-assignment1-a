@@ -63,29 +63,41 @@ public class UnitTests {
 
     @Test
     void testLogicPuzzle() {
-        String[][] expected = {
-                { "Bob", "Jane", "Priya", "Lane", "Yien" },
-                { "dog", "hamster", "bird", "fish", "cat" }
-        };
-        String[][] actual = Assignment1aAssignment.solveLogicPuzzle();
-        assertArrayEquals(expected[0], actual[0]);
-        assertArrayEquals(expected[1], actual[1]);
+        String[][] textArray = Assignment1aAssignment.solveLogicPuzzle();
+        for (int i = 0; i < textArray.length; i++) {
+            if (textArray[i][0] == "Bob") {
+                assert (textArray[i][1] == "dog");
+            } else if (textArray[i][0] == "Priya") {
+                assert (textArray[i][1] == "cat");
+            } else if (textArray[i][0] == "Lane") {
+                assert (textArray[i][1] == "bird");
+            } else if (textArray[i][0] == "Yien") {
+                assert (textArray[i][1] == "fish");
+            } else if (textArray[i][0] == "Jane") {
+                assert (textArray[i][1] == "hamster");
+            } else {
+                assert (false);
+            }
+        }
     }
 
     @Test
-    void locatePlayersTest() {
-        int diameter = 100;
-        int players = 4;
-        double[][] expected = {
-                { 70.0, 120.0 },
-                { 20.0, 70.0 },
-                { 70.0, 20.0 },
-                { 120.0, 70.0 }
-        };
-        double[][] actual = Assignment1aAssignment.locatePlayers(diameter, players);
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i][0], actual[i][0], 0.1);
-            assertEquals(expected[i][1], actual[i][1], 0.1);
-        }
+    void tableLocationTest() {
+        Assignment1bAssignment.Point[] test = Assignment1aAssignment.locatePlayers(4, 10);
+
+        // N.B. This is only testing for 4 players, radius 10.
+        // You should test for other numbers of players and radii.
+        // Marks are not guaranteed just because this test passes.
+
+        assert (test.length == 4);
+        assertEquals(test[0].x, 30.0, 0.1);
+        assertEquals(test[0].y, 40.0, 0.1);
+        assertEquals(test[1].x, 20.0, 0.1);
+        assertEquals(test[1].y, 30.0, 0.1);
+        assertEquals(test[2].x, 30.0, 0.1);
+        assertEquals(test[2].y, 20.0, 0.1);
+        assertEquals(test[3].x, 40.0, 0.1);
+        assertEquals(test[3].y, 30.0, 0.1);
+
     }
 }

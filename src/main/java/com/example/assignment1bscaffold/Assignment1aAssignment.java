@@ -1,7 +1,9 @@
 package com.example.assignment1bscaffold;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This submission is Rishikumar Patel's original work and has not been copied
@@ -66,44 +68,61 @@ public class Assignment1aAssignment {
      * @return a 2D array with the first row containing student names and the second
      *         row containing their corresponding pets
      */
+
     public static String[][] solveLogicPuzzle() {
-        // Initialize the results array
-        String[][] solution = new String[5][2];
+        String[] students = { "Bob", "Jane", "Priya", "Lane", "Yien" };
+        String[] pets = { "dog", "cat", "bird", "fish", "hamster" };
+        Map<String, String> assignments = new HashMap<>();
 
-        // Assigning pets based on direct clues and logical deduction
-        solution[0][0] = "Bob"; // Bob
-        solution[0][1] = "dog"; // has a dog
-
-        solution[3][0] = "Lane"; // Lane
-        solution[3][1] = "bird"; // has a bird (not furry, and only bird or fish are left, not taken by Priya or
-                                 // Jane)
-
-        solution[4][0] = "Yien"; // Yien
-        solution[4][1] = "fish"; // has a fish (not a cat, since Priya has it)
-
-        solution[2][0] = "Priya"; // Priya
-        solution[2][1] = "cat"; // has a cat (can't have fish or hamster, and bird is taken)
-
-        solution[1][0] = "Jane"; // Jane
-        solution[1][1] = "hamster"; // has a hamster (left option, can't have cat or bird)
-
-        return solution;
+        if (solve(0, students, pets, assignments)) {
+            String[][] solution = new String[students.length][2];
+            for (int i = 0; i < students.length; i++) {
+                solution[i][0] = students[i];
+                solution[i][1] = assignments.get(students[i]);
+            }
+            return solution;
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * Helper function to check if a column has only one true value.
-     *
-     * @param matrix the boolean matrix to check
-     * @param col    the column index to check
-     * @return true if the column has only one true value, false otherwise
-     */
-    private static boolean isSingleTrueInColumn(boolean[][] matrix, int col) {
-        int trueCount = 0;
-        for (boolean[] row : matrix) {
-            if (row[col])
-                trueCount++;
+    private static boolean solve(int index, String[] students, String[] pets, Map<String, String> assignments) {
+        if (index == students.length) {
+            return true;
         }
-        return trueCount == 1;
+
+        String student = students[index];
+        for (String pet : pets) {
+            if (canAssign(student, pet, assignments)) {
+                assignments.put(student, pet);
+                if (solve(index + 1, students, pets, assignments)) {
+                    return true;
+                }
+                assignments.remove(student);
+            }
+        }
+        return false;
+    }
+
+    private static boolean canAssign(String student, String pet, Map<String, String> assignments) {
+        if (assignments.containsValue(pet)) {
+            return false; // Pet is already assigned
+        }
+
+        switch (student) {
+            case "Bob":
+                return pet.equals("dog");
+            case "Priya":
+                return !pet.equals("hamster") && !pet.equals("fish");
+            case "Jane":
+                return !pet.equals("cat") && !pet.equals("bird");
+            case "Lane":
+                return !pet.equals("cat") && !pet.equals("dog") && !pet.equals("hamster");
+            case "Yien":
+                return pet.equals("cat") || pet.equals("fish");
+        }
+
+        return true; // If no specific constraint contradicts it
     }
 
     /**
