@@ -67,62 +67,27 @@ public class Assignment1aAssignment {
      *         row containing their corresponding pets
      */
     public static String[][] solveLogicPuzzle() {
-        String[] names = { "Bob", "Jane", "Priya", "Lane", "Yien" };
-        String[] pets = { "dog", "cat", "bird", "fish", "hamster" };
-        String[] ownerPetMatch = new String[5];
+        // Initialize the results array
+        String[][] solution = new String[5][2];
 
-        // Initial clue: Bob has a dog
-        ownerPetMatch[0] = "dog";
+        // Assigning pets based on direct clues and logical deduction
+        solution[0][0] = "Bob"; // Bob
+        solution[0][1] = "dog"; // has a dog
 
-        // Boolean array tracking possible pets for each student
-        boolean[][] possiblePets = {
-                { true, false, false, false, false },
-                { false, true, true, true, true },
-                { false, true, true, true, true },
-                { false, true, true, true, true },
-                { false, true, true, true, true }
-        };
+        solution[3][0] = "Lane"; // Lane
+        solution[3][1] = "bird"; // has a bird (not furry, and only bird or fish are left, not taken by Priya or
+                                 // Jane)
 
-        // Applying given constraints
-        possiblePets[2][4] = false; // Priya doesn't have hamster
-        possiblePets[2][3] = false; // Priya doesn't have fish
-        possiblePets[1][2] = false; // Jane doesn't have bird
-        possiblePets[2][2] = false; // Priya doesn't have bird
-        possiblePets[3][0] = false; // Lane doesn't have dog
-        possiblePets[3][1] = false; // Lane doesn't have cat
-        possiblePets[3][4] = false; // Lane doesn't have hamster
-        possiblePets[4][0] = false; // Yien doesn't have dog
-        possiblePets[4][2] = false; // Yien doesn't have bird
-        possiblePets[4][4] = false; // Yien doesn't have hamster
-        possiblePets[1][1] = false; // Jane doesn't have cat
+        solution[4][0] = "Yien"; // Yien
+        solution[4][1] = "fish"; // has a fish (not a cat, since Priya has it)
 
-        // Elimination logic to determine pet ownership
-        for (int i = 0; i < 5; i++) {
-            if (i != 0) {
-                for (int j = 0; j < 5; j++) {
-                    if (possiblePets[i][j] && isSingleTrueInColumn(possiblePets, j)) {
-                        ownerPetMatch[i] = pets[j];
-                        for (int k = 0; k < 5; k++) {
-                            possiblePets[k][j] = false;
-                        }
-                    }
-                }
-            }
-        }
+        solution[2][0] = "Priya"; // Priya
+        solution[2][1] = "cat"; // has a cat (can't have fish or hamster, and bird is taken)
 
-        // Assign remaining pets based on elimination results
-        for (int j = 0; j < 5; j++) {
-            if (possiblePets[1][j])
-                ownerPetMatch[1] = pets[j]; // Jane
-            if (possiblePets[2][j])
-                ownerPetMatch[2] = pets[j]; // Priya
-            if (possiblePets[3][j])
-                ownerPetMatch[3] = pets[j]; // Lane
-            if (possiblePets[4][j])
-                ownerPetMatch[4] = pets[j]; // Yien
-        }
+        solution[1][0] = "Jane"; // Jane
+        solution[1][1] = "hamster"; // has a hamster (left option, can't have cat or bird)
 
-        return new String[][] { names, ownerPetMatch };
+        return solution;
     }
 
     /**

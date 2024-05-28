@@ -31,8 +31,8 @@ public class Assignment1bScaffoldApplication {
 		System.out.println("Test the solveLogicPuzzle method");
 		String[][] logicPuzzleResult = Assignment1aAssignment.solveLogicPuzzle();
 		System.out.println("Logic Puzzle Solution:");
-		for (int i = 0; i < logicPuzzleResult[0].length; i++) {
-			System.out.println(logicPuzzleResult[0][i] + " - " + logicPuzzleResult[1][i]);
+		for (String[] pair : logicPuzzleResult) {
+			System.out.println(pair[0] + " has a " + pair[1]);
 		}
 		System.out.println();
 
