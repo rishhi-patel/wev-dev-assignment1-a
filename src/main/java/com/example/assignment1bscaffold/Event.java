@@ -12,7 +12,6 @@ public class Event {
         this.name = name;
         this.date = date;
         this.location = location;
-        System.out.println("started-------->");
     }
 
     public String getName() {

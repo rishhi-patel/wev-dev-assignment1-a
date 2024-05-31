@@ -12,7 +12,6 @@ public class EventController {
 
     // Creator: Creates events
     public void createEvent(Event event) {
-        System.out.println("started creating ");
         eventService.createEvent(event);
         System.out.println("Event created successfully!");
     }
