@@ -26,6 +26,7 @@ public class Assignment1bScaffoldApplication implements CommandLineRunner {
 		// Sample usage of wedding planner
 		controller.bookVenue("Lakeside Banquet", "2024-05-20");
 		controller.addGuest("Rishikumar Patel", "rishhi.dev@gmail.com");
+		controller.addGuest("John wick", "johnwick@gmail.com");
 		controller.recordExpense("Venue Booking", 20000);
 		controller.printEventDetails();
 	}

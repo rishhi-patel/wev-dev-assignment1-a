@@ -34,8 +34,11 @@ public class WeddingController {
     // Print details for all bookings, guests, and expenses
     public void printEventDetails() {
         System.out.println("\n--- Event Details ---");
+        System.out.println("");
         venueService.printBookedVenues();
+        System.out.println("");
         guestService.printGuestList();
+        System.out.println("");
         budgetService.printBudgetReport();
     }
 }
