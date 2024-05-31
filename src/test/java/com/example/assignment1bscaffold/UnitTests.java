@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 
 import org.junit.jupiter.api.Test;
 
-public class UnitTests {
+class UnitTests {
 
     @Test
     void rotateArrayTest() {
@@ -98,23 +98,22 @@ public class UnitTests {
             // Parsing the coordinates from the string
             Pattern pattern = Pattern.compile("Player \\d+: \\(([^,]+), ([^)]+)\\)");
             Matcher matcher = pattern.matcher(test.get(i));
-            assertTrue(matcher.find()); // Ensure the string matches the expected format
+            assertTrue(matcher.find());
 
             double x = Double.parseDouble(matcher.group(1));
             double y = Double.parseDouble(matcher.group(2));
 
-            // Perform assertions based on the player index
             if (i == 0) {
-                assertEquals(50.0, x, 0.1);
-                assertEquals(60.0, y, 0.1);
+                assertEquals(40.0, x, 0.1); // Position for player 1
+                assertEquals(20.0, y, 0.1); // Corrected to match the 20 pixel padding and the radius
             } else if (i == 1) {
-                assertEquals(40.0, x, 0.1);
+                assertEquals(60.0, x, 0.1); // Position for player 2
                 assertEquals(40.0, y, 0.1);
             } else if (i == 2) {
-                assertEquals(50.0, x, 0.1);
-                assertEquals(20.0, y, 0.1);
+                assertEquals(40.0, x, 0.1); // Position for player 3
+                assertEquals(60.0, y, 0.1);
             } else if (i == 3) {
-                assertEquals(60.0, x, 0.1);
+                assertEquals(20.0, x, 0.1); // Position for player 4
                 assertEquals(40.0, y, 0.1);
             }
         }

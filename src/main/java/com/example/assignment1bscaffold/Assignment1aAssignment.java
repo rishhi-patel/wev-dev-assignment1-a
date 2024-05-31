@@ -130,27 +130,27 @@ public class Assignment1aAssignment {
      *
      * @param diameter the diameter of the circle
      * @param players  the number of players to position around the table
-     * @return a 2D array containing the x and y coordinates of each player
+     * @return a array containing the x and y coordinates of each player
      */
     public static List<String> aroundTheTable(int diameter, int players) {
         int radius = diameter / 2;
-        List<String> coordinates = new ArrayList<>();
+        int padding = 20;
+        int centerX = radius + padding;
+        int centerY = radius + padding;
 
-        // Constants for canvas placement
-        int xOffset = 20 + radius;
-        int yOffset = 20 + radius;
+        List<String> playerPositions = new ArrayList<>();
+        double angleIncrement = 2 * Math.PI / players;
+        double startAngle = Math.PI / 2; // Starting from the bottom of the circle
 
-        // Calculate the angle step in radians
-        double angleStep = 2 * Math.PI / players;
-
-        // Generate coordinates for each player
         for (int i = 0; i < players; i++) {
-            double angle = angleStep * i - Math.PI / 2; // Offset by PI/2 to start at the bottom
-            int x = (int) (xOffset + radius * Math.cos(angle));
-            int y = (int) (yOffset + radius * Math.sin(angle));
-            coordinates.add(String.format("Player %d: (%d, %d)", i + 1, x, y));
+            double angle = startAngle - i * angleIncrement;
+            int x = (int) (centerX + radius * Math.cos(angle));
+            int y = (int) (centerY - radius * Math.sin(angle)); // Subtract to correct for the y-axis inversion in
+                                                                // canvas
+            playerPositions.add(String.format("Player %d: (%d, %d)", i + 1, x, y));
         }
 
-        return coordinates;
+        return playerPositions;
     }
+
 }

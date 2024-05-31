@@ -1,6 +1,7 @@
 package com.example.assignment1bscaffold;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,15 +37,14 @@ public class Assignment1bScaffoldApplication {
 		}
 		System.out.println();
 
-		// Test the locatePlayers method
+		// Test the locatePlayers method around the table
 		System.out.println("Test the locatePlayers method");
 		int diameter = 100;
 		int players = 6;
-		double[][] playerCoordinates = Assignment1aAssignment.locatePlayers(diameter, players);
+		List<String> playerCoordinates = Assignment1aAssignment.aroundTheTable(diameter, players);
 		System.out.println("Player Coordinates:");
-		for (int i = 0; i < playerCoordinates.length; i++) {
-			System.out.println(
-					"Player " + (i + 1) + ": (" + playerCoordinates[i][0] + ", " + playerCoordinates[i][1] + ")");
+		for (String pos : playerCoordinates) {
+			System.out.println(pos);
 		}
 		System.out.println();
 	}
