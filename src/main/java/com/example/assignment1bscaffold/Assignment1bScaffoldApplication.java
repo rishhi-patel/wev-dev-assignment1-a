@@ -16,6 +16,8 @@ public class Assignment1bScaffoldApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		// Creator pattern: MainApp is responsible for creating the WeddingController
+		// and initializing it with its dependencies.
 		WeddingController controller = new WeddingController(
 				new VenueService(new VenueRepository()),
 				new GuestService(new GuestRepository()),

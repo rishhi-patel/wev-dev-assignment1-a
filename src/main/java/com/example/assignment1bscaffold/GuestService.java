@@ -15,6 +15,9 @@ public class GuestService {
 
     public void printGuestList() {
         System.out.println("Guest List:");
-        guestRepository.getGuestList().forEach(System.out::println);
+        List<String> guests = guestRepository.getGuestList();
+        for (String guest : guests) {
+            System.out.println(guest);
+        }
     }
 }

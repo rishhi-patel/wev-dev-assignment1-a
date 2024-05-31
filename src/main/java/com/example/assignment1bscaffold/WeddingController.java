@@ -1,10 +1,12 @@
 package com.example.assignment1bscaffold;
 
+// Controller class which Manages the interactions between UI and business logic/services.
 public class WeddingController {
     private VenueService venueService;
     private GuestService guestService;
     private BudgetService budgetService;
 
+    // Constructor Injection an example of Low Coupling.
     public WeddingController(VenueService venueService, GuestService guestService, BudgetService budgetService) {
         this.venueService = venueService;
         this.guestService = guestService;
