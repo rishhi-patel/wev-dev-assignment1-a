@@ -2,6 +2,11 @@ package com.example.assignment1bscaffold;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.junit.jupiter.api.Test;
 
@@ -83,21 +88,35 @@ public class UnitTests {
 
     @Test
     void tableLocationTest() {
-        Assignment1bAssignment.Point[] test = Assignment1aAssignment.locatePlayers(4, 10);
+        List<String> test = Assignment1aAssignment.aroundTheTable(40, 4); // Diameter 40 and 4 players
 
-        // N.B. This is only testing for 4 players, radius 10.
-        // You should test for other numbers of players and radii.
-        // Marks are not guaranteed just because this test passes.
+        // Ensure we have the correct number of players
+        assertEquals(4, test.size());
 
-        assert (test.length == 4);
-        assertEquals(test[0].x, 30.0, 0.1);
-        assertEquals(test[0].y, 40.0, 0.1);
-        assertEquals(test[1].x, 20.0, 0.1);
-        assertEquals(test[1].y, 30.0, 0.1);
-        assertEquals(test[2].x, 30.0, 0.1);
-        assertEquals(test[2].y, 20.0, 0.1);
-        assertEquals(test[3].x, 40.0, 0.1);
-        assertEquals(test[3].y, 30.0, 0.1);
+        // Example of how you could parse and test the coordinates
+        for (int i = 0; i < test.size(); i++) {
+            // Parsing the coordinates from the string
+            Pattern pattern = Pattern.compile("Player \\d+: \\(([^,]+), ([^)]+)\\)");
+            Matcher matcher = pattern.matcher(test.get(i));
+            assertTrue(matcher.find()); // Ensure the string matches the expected format
 
+            double x = Double.parseDouble(matcher.group(1));
+            double y = Double.parseDouble(matcher.group(2));
+
+            // Perform assertions based on the player index
+            if (i == 0) {
+                assertEquals(50.0, x, 0.1);
+                assertEquals(60.0, y, 0.1);
+            } else if (i == 1) {
+                assertEquals(40.0, x, 0.1);
+                assertEquals(40.0, y, 0.1);
+            } else if (i == 2) {
+                assertEquals(50.0, x, 0.1);
+                assertEquals(20.0, y, 0.1);
+            } else if (i == 3) {
+                assertEquals(60.0, x, 0.1);
+                assertEquals(40.0, y, 0.1);
+            }
+        }
     }
 }

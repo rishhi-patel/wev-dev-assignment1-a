@@ -132,16 +132,23 @@ public class Assignment1aAssignment {
      * @param players  the number of players to position around the table
      * @return a 2D array containing the x and y coordinates of each player
      */
-    public static double[][] locatePlayers(int diameter, int players) {
-        double[][] coordinates = new double[players][2];
-        double radius = (diameter - 40) / 2.0;
-        double centerX = radius + 20;
-        double centerY = radius + 20;
+    public static List<String> aroundTheTable(int diameter, int players) {
+        int radius = diameter / 2;
+        List<String> coordinates = new ArrayList<>();
 
+        // Constants for canvas placement
+        int xOffset = 20 + radius;
+        int yOffset = 20 + radius;
+
+        // Calculate the angle step in radians
+        double angleStep = 2 * Math.PI / players;
+
+        // Generate coordinates for each player
         for (int i = 0; i < players; i++) {
-            double angle = 2 * Math.PI * i / players;
-            coordinates[i][0] = centerX + radius * Math.cos(angle - Math.PI / 2);
-            coordinates[i][1] = centerY + radius * Math.sin(angle - Math.PI / 2);
+            double angle = angleStep * i - Math.PI / 2; // Offset by PI/2 to start at the bottom
+            int x = (int) (xOffset + radius * Math.cos(angle));
+            int y = (int) (yOffset + radius * Math.sin(angle));
+            coordinates.add(String.format("Player %d: (%d, %d)", i + 1, x, y));
         }
 
         return coordinates;
