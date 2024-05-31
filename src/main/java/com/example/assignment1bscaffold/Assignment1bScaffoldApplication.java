@@ -10,9 +10,7 @@ public class Assignment1bScaffoldApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Assignment1bScaffoldApplication.class, args);
-		EventController controller = new EventController(new EventService());
-
-		System.out.println("started-------->");
+		EventController controller = new EventController(new EventService(new EventRepository()));
 		// Demonstration of creating an event
 		Event newEvent = new Event("Tech Conference", new Date(0), "Convention Center");
 		System.out.println(newEvent.getName());
@@ -24,6 +22,5 @@ public class Assignment1bScaffoldApplication {
 
 		// Demonstration of displaying events
 		controller.displayEvents();
-		System.out.println("Server is running");
 	}
 }

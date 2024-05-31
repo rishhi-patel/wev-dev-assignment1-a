@@ -16,6 +16,7 @@ public class EventService implements IEventService {
 
     @Override
     public void createEvent(Event event) {
+        System.out.println("lololo");
         eventRepository.addEvent(event);
     }
 

@@ -4,14 +4,15 @@ import java.util.List;
 
 // Controller class that is not the main class.
 public class EventController {
-    private IEventService eventService;
+    private EventService eventService;
 
-    public EventController(IEventService eventService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
     // Creator: Creates events
     public void createEvent(Event event) {
+        System.out.println("started creating ");
         eventService.createEvent(event);
         System.out.println("Event created successfully!");
     }
