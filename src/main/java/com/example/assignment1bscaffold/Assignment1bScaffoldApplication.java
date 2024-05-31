@@ -10,17 +10,17 @@ public class Assignment1bScaffoldApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Assignment1bScaffoldApplication.class, args);
-		EventController controller = new EventController(new EventService(new EventRepository()));
-		// Demonstration of creating an event
-		Event newEvent = new Event("Tech Conference", new Date(0), "Convention Center");
-		System.out.println(newEvent.getName());
-		controller.createEvent(newEvent);
 
-		// Demonstration of updating an event
-		newEvent.setDate(new Date(newEvent.getDate().getTime() + 86400000)); // Adding one day
-		controller.updateEvent(newEvent);
+		WeddingController controller = new WeddingController(
+				new VenueService(new VenueRepository()),
+				new GuestService(new GuestRepository()),
+				new BudgetService(new BudgetRepository()));
 
-		// Demonstration of displaying events
-		controller.displayEvents();
+		// Sample usage of wedding planner
+		controller.bookVenue("Lakeside Banquet", "2024-05-20");
+		controller.addGuest("Jane Doe", "jane.doe@example.com");
+		controller.recordExpense("Venue Booking", 2000);
+		controller.printEventDetails();
 	}
+
 }
