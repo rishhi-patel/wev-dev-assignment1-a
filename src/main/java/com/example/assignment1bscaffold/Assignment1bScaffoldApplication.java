@@ -18,7 +18,7 @@ public class Assignment1bScaffoldApplication {
 		System.out.println("Rotated Array: " + Arrays.toString(rotatedArray));
 
 		String[] sentences = { "a", "b", "c", "d", "e", "f" };
-		int location = 2;
+		int location = 5;
 		String[] arrayWithPageBreaks = Assignment1aAssignment.insertBreaks(sentences, location);
 		System.out.println("Array with Page Breaks: " + Arrays.toString(arrayWithPageBreaks));
 		System.out.println();

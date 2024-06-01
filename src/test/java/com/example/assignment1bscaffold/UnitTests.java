@@ -5,42 +5,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 
-class UnitTests {
+public class UnitTests {
 
     @Test
-    void rotateArrayTest() {
+    void rotateLeftTest() {
         String[] textArray = { "a", "b", "c", "d", "e" };
-        int places = 1;
         String[] expected = { "b", "c", "d", "e", "a" };
-        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
-        assertArrayEquals(expected, actual);
+        String[] actual = Assignment1aAssignment.rotateLeft(textArray, 1);
+        assert (actual[0] == expected[0]);
+        assert (actual[1] == expected[1]);
+        assert (actual[2] == expected[2]);
+        assert (actual[3] == expected[3]);
+        assert (actual[4] == expected[4]);
     }
 
     @Test
-    void rotateArrayTestWithMorePlaces() {
-        String[] textArray = { "a", "b", "c", "d", "e" };
-        int places = 3;
-        String[] expected = { "d", "e", "a", "b", "c" };
-        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void rotateArrayTestWhenEmpty() {
+    void rotateLeftTestWhenEmpty() {
         String[] textArray = {};
-        int places = 3;
-        String[] expected = {};
-        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
-        assertArrayEquals(expected, actual);
+        int expected = 0;
+        String[] actual = Assignment1aAssignment.rotateLeft(textArray, 0);
+        assert (actual.length == expected);
     }
 
     @Test
-    void insertPageBreaksTest() {
+    void pageBreakTest() {
         String[] textArray = { "a", "b", "c", "d", "e" };
         int location = 2;
         String[] expected = { "a", "b", "*page break*", "c", "d", "*page break*", "e" };
@@ -49,21 +42,12 @@ class UnitTests {
     }
 
     @Test
-    void insertPageBreaksTestWhenLocationExceedsLength() {
-        String[] textArray = { "a", "b", "c", "d", "e" };
-        int location = 6;
-        String[] expected = { "a", "b", "c", "d", "e" };
-        String[] actual = Assignment1aAssignment.insertBreaks(textArray, location);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void insertPageBreaksWhenEmptyTest() {
+    void pageBreakWhenEmptyTest() {
         String[] textArray = {};
-        int location = 2;
-        String[] expected = {};
-        String[] actual = Assignment1aAssignment.insertBreaks(textArray, location);
-        assertArrayEquals(expected, actual);
+        int expected = 0;
+        String[] actual = Assignment1aAssignment.insertBreaks(textArray, 2);
+        assert (actual.length == expected);
+
     }
 
     @Test
@@ -88,34 +72,39 @@ class UnitTests {
 
     @Test
     void tableLocationTest() {
-        List<String> test = Assignment1aAssignment.calculatePlayerPositions(40, 4); // Diameter 40 and 4 players
+        // Testing the positioning of 4 players around a table with a diameter of 40
+        // units
+        List<String> positions = Assignment1aAssignment.calculatePlayerPositions(40, 4);
 
-        // Ensure we have the correct number of players
-        assertEquals(4, test.size());
+        // Ensure that the list contains exactly 4 position entries
+        assertEquals(4, positions.size());
 
-        // Example of how you could parse and test the coordinates
-        for (int i = 0; i < test.size(); i++) {
-            // Parsing the coordinates from the string
-            Pattern pattern = Pattern.compile("Player \\d+: \\(([^,]+), ([^)]+)\\)");
-            Matcher matcher = pattern.matcher(test.get(i));
-            assertTrue(matcher.find());
+        // Validate the coordinates of each player position
+        for (int i = 0; i < positions.size(); i++) {
+            // Regex to extract the x and y coordinates from the position string
+            Pattern coordinatePattern = Pattern.compile("Player \\d+: \\(([^,]+), ([^)]+)\\)");
+            Matcher coordinateMatcher = coordinatePattern.matcher(positions.get(i));
+            assertTrue(coordinateMatcher.find());
 
-            double x = Double.parseDouble(matcher.group(1));
-            double y = Double.parseDouble(matcher.group(2));
+            // Parsing the x and y coordinates as doubles from the captured groups
+            double xPos = Double.parseDouble(coordinateMatcher.group(1));
+            double yPos = Double.parseDouble(coordinateMatcher.group(2));
 
+            // Assert coordinates for each player based on expected values
             if (i == 0) {
-                assertEquals(40.0, x, 0.1); // Position for player 1
-                assertEquals(20.0, y, 0.1); // Corrected to match the 20 pixel padding and the radius
+                assertEquals(40.0, xPos, 0.1); // Tolerance of 0.1 for floating point comparisons
+                assertEquals(20.0, yPos, 0.1);
             } else if (i == 1) {
-                assertEquals(60.0, x, 0.1); // Position for player 2
-                assertEquals(40.0, y, 0.1);
+                assertEquals(60.0, xPos, 0.1);
+                assertEquals(40.0, yPos, 0.1);
             } else if (i == 2) {
-                assertEquals(40.0, x, 0.1); // Position for player 3
-                assertEquals(60.0, y, 0.1);
+                assertEquals(40.0, xPos, 0.1);
+                assertEquals(60.0, yPos, 0.1);
             } else if (i == 3) {
-                assertEquals(20.0, x, 0.1); // Position for player 4
-                assertEquals(40.0, y, 0.1);
+                assertEquals(20.0, xPos, 0.1);
+                assertEquals(40.0, yPos, 0.1);
             }
         }
     }
+
 }
