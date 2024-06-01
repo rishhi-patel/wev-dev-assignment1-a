@@ -12,19 +12,14 @@ public class Assignment1bScaffoldApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Assignment1bScaffoldApplication.class, args);
 
-		// Test the rotateArray method
-		System.out.println("Test the rotateArray method");
 		String[] array = { "a", "b", "c", "d", "e", "f" };
 		int places = 4;
-		String[] rotatedArray = Assignment1aAssignment.rotateArray(array, places);
+		String[] rotatedArray = Assignment1aAssignment.rotateLeft(array, places);
 		System.out.println("Rotated Array: " + Arrays.toString(rotatedArray));
-		System.out.println();
 
-		// Test the insertPageBreaks method
-		System.out.println("Test the insertPageBreaks method");
 		String[] sentences = { "a", "b", "c", "d", "e", "f" };
 		int location = 2;
-		String[] arrayWithPageBreaks = Assignment1aAssignment.insertPageBreaks(sentences, location);
+		String[] arrayWithPageBreaks = Assignment1aAssignment.insertBreaks(sentences, location);
 		System.out.println("Array with Page Breaks: " + Arrays.toString(arrayWithPageBreaks));
 		System.out.println();
 
@@ -41,7 +36,7 @@ public class Assignment1bScaffoldApplication {
 		System.out.println("Test the locatePlayers method");
 		int diameter = 100;
 		int players = 6;
-		List<String> playerCoordinates = Assignment1aAssignment.aroundTheTable(diameter, players);
+		List<String> playerCoordinates = Assignment1aAssignment.calculatePlayerPositions(diameter, players);
 		System.out.println("Player Coordinates:");
 		for (String pos : playerCoordinates) {
 			System.out.println(pos);

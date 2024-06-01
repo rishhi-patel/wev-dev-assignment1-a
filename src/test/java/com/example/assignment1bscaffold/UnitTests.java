@@ -17,7 +17,7 @@ class UnitTests {
         String[] textArray = { "a", "b", "c", "d", "e" };
         int places = 1;
         String[] expected = { "b", "c", "d", "e", "a" };
-        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
         assertArrayEquals(expected, actual);
     }
 
@@ -26,7 +26,7 @@ class UnitTests {
         String[] textArray = { "a", "b", "c", "d", "e" };
         int places = 3;
         String[] expected = { "d", "e", "a", "b", "c" };
-        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
         assertArrayEquals(expected, actual);
     }
 
@@ -35,7 +35,7 @@ class UnitTests {
         String[] textArray = {};
         int places = 3;
         String[] expected = {};
-        String[] actual = Assignment1aAssignment.rotateArray(textArray, places);
+        String[] actual = Assignment1aAssignment.rotateLeft(textArray, places);
         assertArrayEquals(expected, actual);
     }
 
@@ -44,7 +44,7 @@ class UnitTests {
         String[] textArray = { "a", "b", "c", "d", "e" };
         int location = 2;
         String[] expected = { "a", "b", "*page break*", "c", "d", "*page break*", "e" };
-        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        String[] actual = Assignment1aAssignment.insertBreaks(textArray, location);
         assertArrayEquals(expected, actual);
     }
 
@@ -53,7 +53,7 @@ class UnitTests {
         String[] textArray = { "a", "b", "c", "d", "e" };
         int location = 6;
         String[] expected = { "a", "b", "c", "d", "e" };
-        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        String[] actual = Assignment1aAssignment.insertBreaks(textArray, location);
         assertArrayEquals(expected, actual);
     }
 
@@ -62,7 +62,7 @@ class UnitTests {
         String[] textArray = {};
         int location = 2;
         String[] expected = {};
-        String[] actual = Assignment1aAssignment.insertPageBreaks(textArray, location);
+        String[] actual = Assignment1aAssignment.insertBreaks(textArray, location);
         assertArrayEquals(expected, actual);
     }
 
@@ -88,7 +88,7 @@ class UnitTests {
 
     @Test
     void tableLocationTest() {
-        List<String> test = Assignment1aAssignment.aroundTheTable(40, 4); // Diameter 40 and 4 players
+        List<String> test = Assignment1aAssignment.calculatePlayerPositions(40, 4); // Diameter 40 and 4 players
 
         // Ensure we have the correct number of players
         assertEquals(4, test.size());
