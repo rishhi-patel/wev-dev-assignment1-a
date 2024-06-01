@@ -2,6 +2,7 @@ package com.example.assignment1bscaffold;
 
 import java.util.List;
 
+// Controller class to manage business logics
 public class VehicleController {
     private VehicleService vehicleService;
 
