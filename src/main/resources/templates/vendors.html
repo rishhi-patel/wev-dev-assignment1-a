@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Vendors List</title>
+  </head>
+  <body>
+    <h1>List of Vendors</h1>
+    <ul>
+      <li th:each="vendor : ${vendors}">
+        <strong th:text="${vendor.name}">Vendor Name</strong><br />
+        Service Type: <span th:text="${vendor.serviceType}">Type</span><br />
+        Contact Info: <span th:text="${vendor.contactInfo}">Contact</span><br />
+        Contract Details:
+        <span th:text="${vendor.contractDetails}">Contract</span>
+      </li>
+    </ul>
+  </body>
+</html>
