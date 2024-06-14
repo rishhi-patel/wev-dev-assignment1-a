@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//Information Expert: VendorList knows all the details about how to store and iterate over vendors. It is responsible for managing vendor data.
+
+// Controller: VendorController acts as the controller in the MVC pattern, managing the flow between the model and the view.
 @Controller
 public class VendorController {
 

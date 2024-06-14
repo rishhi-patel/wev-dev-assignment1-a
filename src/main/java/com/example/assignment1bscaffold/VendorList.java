@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+//Iterator Usage: The use of the iterator pattern in VendorList facilitates the traversal of vendors without exposing the underlying representation
 public class VendorList implements Iterable<Vendor> {
     private List<Vendor> vendors = new ArrayList<>();
 
